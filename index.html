@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diego Curillo | Portafolio</title>
     <style>
-        /* Variables de color basadas en tu diseño */
+        /* Variables de color */
         :root {
             --bg-main: #0b1120;
             --bg-card: #111827;
-            --primary: #1d4ed8; /* Azul botón principal */
+            --bg-card-hover: #1e293b;
+            --primary: #1d4ed8;
             --primary-hover: #2563eb;
-            --accent: #38bdf8; /* Azul claro para textos */
+            --accent: #38bdf8;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --border: #1e293b;
@@ -29,13 +30,12 @@
             color: var(--text-main);
             display: flex;
             justify-content: center;
-            align-items: center;
             min-height: 100vh;
-            padding: 20px;
+            padding: 40px 20px;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             width: 100%;
             background-color: var(--bg-card);
             border: 1px solid var(--border);
@@ -44,7 +44,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* Barra de Navegación Superior */
+        /* Encabezado */
         header {
             display: flex;
             justify-content: space-between;
@@ -60,17 +60,13 @@
             letter-spacing: 0.5px;
         }
 
-        .nav-links {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
         .nav-links a {
             color: var(--text-muted);
             text-decoration: none;
+            font-size: 0.85rem;
             margin-left: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             transition: color 0.3s;
         }
 
@@ -78,10 +74,30 @@
             color: var(--text-main);
         }
 
-        /* Sección Hero (Principal) */
+        /* Sección Hero con Foto */
         .hero {
             padding: 50px 30px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
             border-bottom: 1px solid var(--border);
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-image {
+            flex-shrink: 0;
+        }
+
+        .hero-image img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary);
+            box-shadow: 0 0 20px rgba(29, 78, 216, 0.3);
         }
 
         .subtitle {
@@ -101,7 +117,8 @@
         .hero p {
             color: var(--text-muted);
             font-size: 1.1rem;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+            line-height: 1.6;
         }
 
         .buttons {
@@ -126,7 +143,6 @@
 
         .btn-primary:hover {
             background-color: var(--primary-hover);
-            border-color: var(--primary-hover);
         }
 
         .btn-secondary {
@@ -136,73 +152,120 @@
         }
 
         .btn-secondary:hover {
-            background-color: #1e293b;
-            border-color: #475569;
+            background-color: var(--bg-card-hover);
         }
 
-        /* Sección de Tarjetas */
-        .sections {
-            padding: 30px;
+        /* Secciones Generales */
+        section {
+            padding: 40px 30px;
+            border-bottom: 1px solid var(--border);
         }
 
-        .sections h3 {
-            font-size: 1.1rem;
-            margin-bottom: 25px;
+        section h2 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
             color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .grid {
+        .about-text {
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .about-text ul {
+            margin-top: 15px;
+            margin-left: 20px;
+        }
+
+        .about-text li {
+            margin-bottom: 10px;
+        }
+
+        /* Grid de Proyectos */
+        .projects-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 25px;
+            gap: 20px;
         }
 
-        .card {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            padding: 15px;
+        .project-card {
+            background-color: var(--bg-main);
+            border: 1px solid var(--border);
             border-radius: 8px;
-            transition: background-color 0.3s;
+            padding: 20px;
             text-decoration: none;
             color: inherit;
-            cursor: pointer;
+            transition: transform 0.3s, border-color 0.3s;
+            display: flex;
+            flex-direction: column;
         }
 
-        .card:hover {
-            background-color: #1e293b;
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
         }
 
-        .icon {
-            color: var(--text-main);
-            width: 24px;
-            height: 24px;
-        }
-
-        .card-content h4 {
+        .project-card h3 {
+            color: var(--accent);
             font-size: 1.1rem;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
 
-        .card-content p {
-            font-size: 0.9rem;
+        .project-card p {
             color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            flex-grow: 1;
         }
 
-        /* Responsive para celulares */
-        @media (max-width: 600px) {
-            .grid {
+        .tech-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background-color: #1e293b;
+            color: #cbd5e1;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            padding: 30px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 20px;
+            }
+            .buttons {
+                justify-content: center;
+            }
+            .projects-grid {
                 grid-template-columns: 1fr;
             }
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-            header {
-                flex-direction: column;
-                gap: 15px;
-            }
-            .nav-links a {
-                margin: 0 10px;
+            .nav-links {
+                display: none; /* Ocultar menú en móviles para simplificar */
             }
         }
     </style>
@@ -214,67 +277,92 @@
         <header>
             <div class="logo">DIEGO CURILLO</div>
             <div class="nav-links">
-                <a href="#inicio">INICIO</a>
-                <a href="#proyectos">PROYECTOS</a>
-                <a href="#contacto">CONTACTO</a>
+                <a href="#sobre-mi">Sobre mí</a>
+                <a href="#proyectos">Proyectos</a>
+                <a href="#contacto">Contacto</a>
             </div>
         </header>
 
-        <!-- Sección Principal -->
-        <section class="hero" id="inicio">
-            <div class="subtitle">Estudiante de Ingeniería de Software</div>
-            <h1>Transformando ideas en soluciones digitales.</h1>
-            <p>Aprendiendo, desarrollando proyectos y construyendo mi camino profesional.</p>
-            
-            <div class="buttons">
-                <a href="https://github.com/DiegO2255?tab=repositories" target="_blank" class="btn btn-primary">Explorar proyectos</a>
-                <a href="https://github.com/DiegO2255" target="_blank" class="btn btn-secondary">Ver GitHub</a>
+        <!-- Hero con Foto -->
+        <section class="hero">
+            <div class="hero-text">
+                <div class="subtitle">Estudiante de Ingeniería de Software</div>
+                <h1>Transformando ideas en soluciones digitales.</h1>
+                <p>Aprendiendo, desarrollando proyectos y construyendo mi camino profesional. Apasionado por la lógica, estructuras de datos y el desarrollo web.</p>
+                <div class="buttons">
+                    <a href="#proyectos" class="btn btn-primary">Ver mis proyectos</a>
+                    <a href="https://github.com/DiegO2255" target="_blank" class="btn btn-secondary">Ir a GitHub</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <!-- Aquí va tu foto de perfil. He usado la URL de tu avatar de GitHub -->
+                <img src="https://github.com/DiegO2255.png" alt="Foto de Diego Curillo">
             </div>
         </section>
 
-        <!-- Sección de Tarjetas (Enlaces) -->
-        <section class="sections">
-            <h3>Secciones de la página</h3>
-            <div class="grid">
+        <!-- Sobre Mí -->
+        <section id="sobre-mi">
+            <h2>👨‍💻 Sobre mí</h2>
+            <div class="about-text">
+                <p>Soy estudiante de 4° Nivel de Ingeniería de Software en la Universidad Técnica de Ambato (UTA). Me enfoco en comprender cómo se construyen las soluciones desde la raíz, no solo en hacer que funcionen.</p>
+                <ul>
+                    <li>🎓 Actualmente fortaleciendo mis bases en <strong>POO, Algoritmos y Estructuras de Datos</strong>.</li>
+                    <li>🛠️ Mi entorno habitual incluye VS Code, Apache NetBeans, Git y entornos Linux.</li>
+                    <li>🌱 Mi meta es transformar proyectos académicos en un portafolio sólido y útil.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Proyectos Destacados -->
+        <section id="proyectos">
+            <h2>📂 Proyectos Destacados</h2>
+            <div class="projects-grid">
                 
-                <!-- Tarjeta Sobre Mí -->
-                <a href="https://github.com/DiegO2255" target="_blank" class="card">
-                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                    <div class="card-content">
-                        <h4>Sobre mí</h4>
-                        <p>Tu presentación profesional</p>
+                <a href="https://github.com/DiegO2255/arbol-bst-empresa-cpp" target="_blank" class="project-card">
+                    <h3>🌳 Árbol BST Empresa</h3>
+                    <p>Aplicación de consola que organiza empleados usando un árbol binario de búsqueda. Incluye inserción, búsqueda y visualización por niveles.</p>
+                    <div class="tech-tags">
+                        <span class="tag">C++</span>
+                        <span class="tag">Estructuras</span>
                     </div>
                 </a>
 
-                <!-- Tarjeta Tecnologías -->
-                <a href="https://github.com/DiegO2255" target="_blank" class="card">
-                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
-                    <div class="card-content">
-                        <h4>Tecnologías</h4>
-                        <p>Java, C++, Python y más</p>
+                <a href="https://github.com/DiegO2255/Proyecto-SmarCampus-UTA-WEB-Grupo-7" target="_blank" class="project-card">
+                    <h3>🌐 Proyecto SmarCampus</h3>
+                    <p>Desarrollo de la interfaz y estructura web para un sistema de campus inteligente, conectando lógica, datos y personas.</p>
+                    <div class="tech-tags">
+                        <span class="tag">HTML5</span>
+                        <span class="tag">Web</span>
                     </div>
                 </a>
 
-                <!-- Tarjeta Proyectos -->
-                <a href="https://github.com/DiegO2255?tab=repositories" target="_blank" class="card">
-                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
-                    <div class="card-content">
-                        <h4>Proyectos</h4>
-                        <p>Tus repositorios destacados</p>
+                <a href="https://github.com/DiegO2255/Tarea2RecorridoArbolesUTA" target="_blank" class="project-card">
+                    <h3>🔎 Recorridos de Árboles</h3>
+                    <p>Ejercicios prácticos sobre construcción y recorrido de árboles (preorden, inorden, postorden y BFS) con algoritmos recursivos.</p>
+                    <div class="tech-tags">
+                        <span class="tag">C++</span>
+                        <span class="tag">Java</span>
                     </div>
                 </a>
 
-                <!-- Tarjeta Contacto -->
-                <a href="mailto:diego2255o@gmail.com" class="card">
-                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                    <div class="card-content">
-                        <h4>Contacto</h4>
-                        <p>GitHub, LinkedIn y correo</p>
+                <a href="https://github.com/DiegO2255/Estructura-de-Datos" target="_blank" class="project-card">
+                    <h3>📊 Estructura de Datos</h3>
+                    <p>Repositorio con implementaciones y prácticas de algoritmos y estructuras fundamentales vistas durante la carrera.</p>
+                    <div class="tech-tags">
+                        <span class="tag">C++</span>
+                        <span class="tag">Lógica</span>
                     </div>
                 </a>
 
             </div>
         </section>
+
+        <!-- Footer / Contacto -->
+        <footer id="contacto">
+            <p>📫 ¿Hablamos? Escríbeme a <a href="mailto:diego2255o@gmail.com">diego2255o@gmail.com</a></p>
+            <p style="margin-top: 10px;">O contáctame en <a href="https://www.linkedin.com/in/curillo-diego-55658b261/" target="_blank">LinkedIn</a></p>
+            <p style="margin-top: 20px; font-size: 0.8rem;">© 2024 Diego Curillo. Construido con HTML y CSS.</p>
+        </footer>
     </div>
 
 </body>
